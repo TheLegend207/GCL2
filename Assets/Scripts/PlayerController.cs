@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 3f;
+    public float boostedSpeed = 8f;
+    public float boostDuration = 6f;
     public float jumpForce = 8f;
 
     public Transform groundCheck;
@@ -19,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     // public LevelManager theLevelManager; (tba)
     public bool canMove = true;
+    public GameObject lightningEffects;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -55,19 +60,29 @@ public class PlayerController : MonoBehaviour
 
     void Flip()
     {
-        isFacingRight = !isFacingRight;
+       isFacingRight = !isFacingRight;
 
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
     }
 
-void OnTriggerEnter2D(Collider2D other)
+ private void OnTriggerEnter2D(Collider2D other)
     {
-      if (other.tag == "KillPlane")
+        if (other.CompareTag("SpeedBoots")) //power-up speed boots give player speed and destroy itself
         {
-            // thePlayer.SetActive(false);
+            Destroy(other.gameObject);
+            StartCoroutine(SpeedBoost());
         }
+    }
+
+    IEnumerator SpeedBoost() //increase movement speed temporarily and have effects beside it before going back to original speed
+    {
+        moveSpeed = boostedSpeed;
+        lightningEffects.SetActive(true);
+        yield return new WaitForSeconds(boostDuration);
+        moveSpeed = 3f;
+        lightningEffects.SetActive(false);
     }
 
 }

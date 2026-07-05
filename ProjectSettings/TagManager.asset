@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - SpeedBoots
+  - Ladder
   layers:
   - Default
   - TransparentFX

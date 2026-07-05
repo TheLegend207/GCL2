@@ -2133,6 +2133,7 @@ GameObject:
   - component: {fileID: 1820799042}
   - component: {fileID: 1820799043}
   - component: {fileID: 1820799044}
+  - component: {fileID: 1820799045}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2273,7 +2274,7 @@ MonoBehaviour:
   moveSpeed: 3
   boostedSpeed: 8
   boostDuration: 6
-  jumpForce: 8
+  jumpForce: 4
   groundCheck: {fileID: 2125783145}
   groundCheckRadius: 0.2
   whatIsGround:
@@ -2332,6 +2333,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1820799045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820799036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddab3dd7a5e166f488eb384a26b4d618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1820799043}
 --- !u!1001 &1858672020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2572,11 +2586,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 451742209849036718, guid: 130a0795057644a9896950ac13e8900f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.44
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 451742209849036718, guid: 130a0795057644a9896950ac13e8900f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.46
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 451742209849036718, guid: 130a0795057644a9896950ac13e8900f, type: 3}
       propertyPath: m_LocalPosition.z

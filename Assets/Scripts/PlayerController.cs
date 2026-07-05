@@ -20,22 +20,38 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
     private Animator myAnim;
 
-    // public LevelManager theLevelManager; (tba)
     public bool canMove = true;
     public GameObject lightningEffects;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private LadderMovement ladderMovement; // no longer [SerializeField]
 
     void Start()
     {
         thePlayer = FindAnyObjectByType<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+        ladderMovement = GetComponent<LadderMovement>(); // grabbed automatically here
     }
 
     void Update()
     {
+        bool isClimbing = ladderMovement != null && ladderMovement.isClimbing;
+
+        myAnim.SetBool("IsClimbing", isClimbing);
+
+        if (isClimbing)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            myAnim.speed = Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0f ? 1f : 0f;
+            return;
+        }
+        else
+        {
+            myAnim.speed = 1f;
+        }
+
         moveInput = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput*moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -46,6 +62,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         else if (moveInput < 0 && isFacingRight)
             Flip();
+
         myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
@@ -60,23 +77,23 @@ public class PlayerController : MonoBehaviour
 
     void Flip()
     {
-       isFacingRight = !isFacingRight;
+        isFacingRight = !isFacingRight;
 
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
     }
 
- private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("SpeedBoots")) //power-up speed boots give player speed and destroy itself
+        if (other.CompareTag("SpeedBoots"))
         {
             Destroy(other.gameObject);
             StartCoroutine(SpeedBoost());
         }
     }
 
-    IEnumerator SpeedBoost() //increase movement speed temporarily and have effects beside it before going back to original speed
+    IEnumerator SpeedBoost()
     {
         moveSpeed = boostedSpeed;
         lightningEffects.SetActive(true);
@@ -84,5 +101,4 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 3f;
         lightningEffects.SetActive(false);
     }
-
 }

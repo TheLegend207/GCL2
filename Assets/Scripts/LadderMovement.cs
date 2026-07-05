@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class LadderMovement : MonoBehaviour
 {
-         private float vertical;
-        private float speed = 3f;
-        private bool isLadder;
-        private bool isClimbing;
+    private float vertical;
+    private float climbSpeed = 3f;
+    private bool isLadder;
 
+    // must be public (or public property) so PlayerController can read it
+    public bool isClimbing { get; private set; }
 
-        [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
-    // Update is called once per frame
     void Update()
     {
         vertical = Input.GetAxisRaw("Vertical");
@@ -32,7 +32,7 @@ public class LadderMovement : MonoBehaviour
         if (isClimbing)
         {
             rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * speed);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * climbSpeed);
         }
         else
         {
@@ -58,5 +58,3 @@ public class LadderMovement : MonoBehaviour
         }
     }
 }
-
-

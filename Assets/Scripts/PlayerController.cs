@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             myAnim.speed = 1f;
         }
 
-        moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         if (Input.GetButtonDown("Jump") && isGrounded)

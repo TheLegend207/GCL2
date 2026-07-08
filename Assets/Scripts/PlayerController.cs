@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
         
-        if (canTurn = true)
+        if (canTurn == true)
         {
             myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
             if (moveInput > 0 && !isFacingRight)

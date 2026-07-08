@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     private LadderMovement ladderMovement; // no longer [SerializeField]
 
+    private bool canTurn = true;
+
     void Start()
     {
         thePlayer = FindAnyObjectByType<PlayerController>();
@@ -35,6 +38,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!canTurn)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         bool isClimbing = ladderMovement != null && ladderMovement.isClimbing;
 
         myAnim.SetBool("IsClimbing", isClimbing);
@@ -57,11 +66,15 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
-
+        
+        if (canTurn = true)
+        {
         if (moveInput > 0 && !isFacingRight)
             Flip();
         else if (moveInput < 0 && isFacingRight)
             Flip();
+        }
+        
 
         myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
@@ -91,6 +104,14 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(SpeedBoost());
         }
+
+        if (other.CompareTag("Peach"))
+        {
+           
+            isFacingRight = false;
+            canTurn = false;
+            moveSpeed = 0f;
+        }
     }
 
     IEnumerator SpeedBoost()
@@ -100,5 +121,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(boostDuration);
         moveSpeed = 3f;
         lightningEffects.SetActive(false);
+
     }
+
+
 }

@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 505533092}
   m_Layer: 0
   m_Name: Peach
-  m_TagString: Untagged
+  m_TagString: Peach
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -801,7 +801,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.33157897, y: 0.19915032}
+  m_Offset: {x: 0.21310505, y: 0.19915032}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -811,7 +811,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.70664597, y: 0.39830065}
+  m_Size: {x: 0.46969807, y: 0.39830065}
   m_EdgeRadius: 0
 --- !u!212 &505533089
 SpriteRenderer:
@@ -1235,7 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3556876016953237972, guid: 068e82eaf2251498788989c4cc399c30, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 3556876016953237972, guid: 068e82eaf2251498788989c4cc399c30, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1243,11 +1243,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3556876016953237972, guid: 068e82eaf2251498788989c4cc399c30, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3556876016953237972, guid: 068e82eaf2251498788989c4cc399c30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.00034529547
       objectReference: {fileID: 0}
     - target: {fileID: 3556876016953237972, guid: 068e82eaf2251498788989c4cc399c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1259,7 +1259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3556876016953237972, guid: 068e82eaf2251498788989c4cc399c30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2675,7 +2675,7 @@ Transform:
   m_GameObject: {fileID: 1820799036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -4.89, y: -3.65, z: 0}
+  m_LocalPosition: {x: 3.72, y: 2.59, z: 0}
   m_LocalScale: {x: 5.626297, y: 5.626297, z: 5.626297}
   m_ConstrainProportionsScale: 0
   m_Children:

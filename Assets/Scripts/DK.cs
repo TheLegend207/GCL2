@@ -11,8 +11,8 @@ public class DK : MonoBehaviour
     private Animator animator;
 
     public float attackAnimationLength = 1.5f;
-    public float chestBeatLength = 3f;
-    public float idleLength = 2f;
+    public float chestBeatLength = 1.5f;
+    public float idleLength = 1.5f;
 
     void Start()
     {

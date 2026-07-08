@@ -34,6 +34,7 @@ public class DK : MonoBehaviour
             animator.SetTrigger("Chestbeat");
             yield return new WaitForSeconds(chestBeatLength);
 
+            animator.SetTrigger("Idle");
             yield return new WaitForSeconds(idleLength);
         }
     }

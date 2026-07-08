@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpeedBoots
   - Ladder
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -69,14 +69,15 @@ public class PlayerController : MonoBehaviour
         
         if (canTurn = true)
         {
-        if (moveInput > 0 && !isFacingRight)
+            myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+            if (moveInput > 0 && !isFacingRight)
             Flip();
         else if (moveInput < 0 && isFacingRight)
             Flip();
         }
         
 
-        myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        
     }
 
     void FixedUpdate()
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
             isFacingRight = false;
             canTurn = false;
             moveSpeed = 0f;
+            myAnim.SetFloat("Speed", Mathf.Abs(0f));
         }
     }
 

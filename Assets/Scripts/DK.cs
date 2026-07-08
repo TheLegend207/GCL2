@@ -4,18 +4,22 @@ using UnityEngine;
 public class DK : MonoBehaviour
 {
     public GameObject heldBarrel;
+    public GameObject barrelPrefab;
+    public Transform barrelSpawnPoint;
+
     private Animator animator;
-    public float attackAnimationLength = 1.5f; //the floats just for how long each animation is
+
+    public float attackAnimationLength = 1.5f;
     public float chestBeatLength = 3f;
     public float idleLength = 2f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         animator = GetComponent<Animator>();
         StartCoroutine(DKPattern());
     }
 
-    IEnumerator DKPattern() //DK attack pattern consist of two barrel throws, one to beat its chest and the last to just idle for a bit before repeating the cycle
+    IEnumerator DKPattern()
     {
         while (true)
         {
@@ -32,19 +36,27 @@ public class DK : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void ShowBarrel() //For setting up animation event to make barrel disappear and reappear
-    {
+    public void ShowBarrel()
+{
+    Debug.Log("DK: ShowBarrel called.");
+    if (heldBarrel != null)
         heldBarrel.SetActive(true);
+}
+
+public void ThrowBarrel()
+{
+    Debug.Log("DK: ThrowBarrel called.");
+
+    if (heldBarrel != null)
+        heldBarrel.SetActive(false);
+
+    if (barrelPrefab == null || barrelSpawnPoint == null)
+    {
+        Debug.LogError("DK: Missing barrelPrefab or barrelSpawnPoint.");
+        return;
     }
 
-    public void ThrowBarrel()
-    {
-        heldBarrel.SetActive(false);
-    }
+    Instantiate(barrelPrefab, barrelSpawnPoint.position, barrelSpawnPoint.rotation);
+    Debug.Log("Barrel spawned");
+}
 }

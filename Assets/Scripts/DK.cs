@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DK : MonoBehaviour
@@ -17,6 +18,7 @@ public class DK : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         StartCoroutine(DKPattern());
+        
     }
 
     IEnumerator DKPattern()
@@ -26,8 +28,8 @@ public class DK : MonoBehaviour
             animator.SetTrigger("Attack");
             yield return new WaitForSeconds(attackAnimationLength);
 
-            animator.SetTrigger("Attack");
-            yield return new WaitForSeconds(attackAnimationLength);
+           /* animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(attackAnimationLength);  */
 
             animator.SetTrigger("Chestbeat");
             yield return new WaitForSeconds(chestBeatLength);
@@ -35,28 +37,29 @@ public class DK : MonoBehaviour
             yield return new WaitForSeconds(idleLength);
         }
     }
-
-    public void ShowBarrel()
+        public void ShowBarrel()
 {
-    Debug.Log("DK: ShowBarrel called.");
     if (heldBarrel != null)
         heldBarrel.SetActive(true);
 }
-
-public void ThrowBarrel()
+     public void ThrowBarrel()
 {
-    Debug.Log("DK: ThrowBarrel called.");
-
     if (heldBarrel != null)
         heldBarrel.SetActive(false);
 
     if (barrelPrefab == null || barrelSpawnPoint == null)
-    {
-        Debug.LogError("DK: Missing barrelPrefab or barrelSpawnPoint.");
         return;
-    }
 
-    Instantiate(barrelPrefab, barrelSpawnPoint.position, barrelSpawnPoint.rotation);
-    Debug.Log("Barrel spawned");
+    GameObject barrel = Instantiate(barrelPrefab, barrelSpawnPoint.position, barrelSpawnPoint.rotation);
+
+    BarrelPath barrelPath = barrel.GetComponent<BarrelPath>();
+    if (barrelPath != null && BarrelRouteManager.Instance != null)
+    {
+        List<Transform> route = BarrelRouteManager.Instance.GetRandomRoute();
+        if (route != null && route.Count > 0)
+        {
+            barrelPath.SetPath(route);
+        }
+    }
 }
 }

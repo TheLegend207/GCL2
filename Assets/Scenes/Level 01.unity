@@ -3085,9 +3085,9 @@ MonoBehaviour:
   heldBarrel: {fileID: 69616315}
   barrelPrefab: {fileID: 8963236256024617234, guid: 810af105f07da48f6a00135edac42391, type: 3}
   barrelSpawnPoint: {fileID: 1839432182}
-  attackAnimationLength: 1.5
-  chestBeatLength: 3
-  idleLength: 2
+  attackAnimationLength: 3
+  chestBeatLength: 1.5
+  idleLength: 1.5
 --- !u!1001 &1396038588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3625,7 +3625,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

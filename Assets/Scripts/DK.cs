@@ -10,9 +10,11 @@ public class DK : MonoBehaviour
 
     private Animator animator;
 
-    public float attackAnimationLength = 1.5f;
+    public float attackAnimationLength = 3f;
     public float chestBeatLength = 1.5f;
     public float idleLength = 1.5f;
+    //edit animation length timing in unity instead of in the code
+    //to permenantly change length set aniamtionLength = X under void start
 
     void Start()
     {

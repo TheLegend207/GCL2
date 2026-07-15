@@ -1,0 +1,34 @@
+using UnityEngine;
+
+public class Collectables : MonoBehaviour
+{
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int scoreValue;
+    private LevelManager theLevelManager;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start
+        (
+
+
+        )
+    {
+        theLevelManager = FindFirstObjectByType<LevelManager>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            theLevelManager.AddScore(scoreValue);
+            Destroy(gameObject);
+        }
+    }
+
+}

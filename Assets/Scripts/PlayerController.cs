@@ -134,9 +134,12 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator Shield()
     {
-        moveSpeed = boostedSpeed;
         Shield_effect.SetActive(true);
         yield return new WaitForSeconds(boostDuration);
+        if (CompareTag("Enemy"))
+        {
+             Shield_effect.SetActive(false);
+        }
         moveSpeed = 3f;
     }
 

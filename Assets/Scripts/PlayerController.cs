@@ -121,6 +121,11 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             StartCoroutine(Shield());
         }
+
+        if (other.CompareTag("Barrel"))
+        {
+            myAnim.SetTrigger("Boom");
+        }
     }
 
     IEnumerator SpeedBoost()

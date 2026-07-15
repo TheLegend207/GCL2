@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
     public GameObject lightningEffects;
+    public GameObject Shield_effect;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private LadderMovement ladderMovement; // no longer [SerializeField]
 
@@ -114,6 +115,12 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 0f;
             myAnim.SetFloat("Speed", Mathf.Abs(0f));
         }
+        
+        if (other.CompareTag("Shield"))
+        {
+            Destroy(other.gameObject);
+            StartCoroutine(Shield());
+        }
     }
 
     IEnumerator SpeedBoost()
@@ -125,6 +132,12 @@ public class PlayerController : MonoBehaviour
         lightningEffects.SetActive(false);
 
     }
-
+    IEnumerator Shield()
+    {
+        moveSpeed = boostedSpeed;
+        Shield_effect.SetActive(true);
+        yield return new WaitForSeconds(boostDuration);
+        moveSpeed = 3f;
+    }
 
 }

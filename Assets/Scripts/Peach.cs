@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Peach : MonoBehaviour
 {
@@ -26,7 +27,16 @@ public class Peach : MonoBehaviour
             CancelInvoke(nameof(PeachScream)); //stop screaming animation when player arrives
             animator.Play("Peach Idle");
             StartCoroutine(ShowSpriteAfterDelay());
+
+            StartCoroutine(WinScreenAfterDelay());
+           
         }
+    }
+
+    IEnumerator WinScreenAfterDelay()
+    {
+        yield return new WaitForSeconds(6.0f);
+        SceneManager.LoadScene("Win Screen");
     }
 
     IEnumerator ShowSpriteAfterDelay()

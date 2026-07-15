@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e9e793c9776024e2d8a70c21b6be7646
+guid: b5a523986dcb1f7458f8d7822666f1ae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -894095381526335850
-    second: Lightning_0
+      213: -5385570453361664743
+    second: hanpsd_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lightning_0
+      name: hanpsd_0
       rect:
         serializedVersion: 2
-        x: 259
-        y: 57
-        width: 763
-        height: 855
+        x: 65
+        y: 45
+        width: 510
+        height: 550
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69e2ec4dcf88793f0800000000000000
-      internalID: -894095381526335850
+      spriteID: 91dd986e43c9245b0800000000000000
+      internalID: -5385570453361664743
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lightning_0: -894095381526335850
+      hanpsd_0: -5385570453361664743
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

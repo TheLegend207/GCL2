@@ -8,6 +8,7 @@ TagManager:
   - Ladder
   - Enemy
   - Peach
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1376546683
+    locked: 0
+  - name: PowerUp
+    uniqueID: 3041174835
     locked: 0
   m_RenderingLayers:
   - Default

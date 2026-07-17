@@ -14,7 +14,7 @@ public class DK : MonoBehaviour
     public float chestBeatLength = 1.5f;
     public float idleLength = 1.5f;
     //edit animation length timing in unity instead of in the code
-    //to permenantly change length set aniamtionLength = X under void start
+    //to permenantly change length set aniamtionLength = X under void start 
 
     void Start()
     {

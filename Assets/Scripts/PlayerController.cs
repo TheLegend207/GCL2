@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement; // Lets us reload the scene when the player d
 public class PlayerController : MonoBehaviour // This script controls the player character.
 {
     public float moveSpeed = 3f; // Normal movement speed.
-    public float boostedSpeed = 8f; // Speed during the speed boost power-up.
-    public float boostDuration = 6f; // How long the speed boost lasts.
+    public float boostedSpeed = 6f; // Speed during the speed boost power-up.
+    public float boostDuration = 4f; // How long the speed boost lasts.
     public float jumpForce = 8f; // How high the player jumps.
+    public float hammerDuration = 4f; //duration of hammer
 
     public Transform groundCheck; // A point below the player used to check if we are standing on ground.
     public float groundCheckRadius = 0.2f; // Radius of the ground-check circle.
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour // This script controls the player
     private Coroutine blinkRoutine; // Stores the blinking coroutine so we can stop it later.
     public float blinkInterval = 0.15f; // Speed of the blinking effect.
 
+    public GameObject HammerHitbox;
+
     void Start() // Runs once when the scene starts.
     {
         thePlayer = FindAnyObjectByType<PlayerController>(); // Finds the player object in the scene.
@@ -47,6 +50,8 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
         if (Shield_effect != null) // Make sure the shield object exists before touching it.
             Shield_effect.SetActive(false); // Start with the shield hidden.
+
+            HammerHitbox.SetActive(false);
     }
 
     void Update() // Runs once every frame.
@@ -134,6 +139,13 @@ public class PlayerController : MonoBehaviour // This script controls the player
             Destroy(other.gameObject); // Remove the pickup.
             StartCoroutine(InvincibilityPowerUp()); // Start the blinking invincibility effect.
         }
+
+        if (other.CompareTag("Hammer"))
+        {
+          
+            Destroy(other.gameObject);
+            StartCoroutine(HammerPower());
+        }
     }
 
     IEnumerator SpeedBoost() // Makes the player faster for a limited time.
@@ -144,7 +156,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
         moveSpeed = 3f; // Restore normal movement speed.
         lightningEffects.SetActive(false); // Hide the lightning effect.
     }
-
+    
     IEnumerator Shield() // Activates a shield that blocks one hit.
     {
         shieldActive = true; // Turn shield protection on.
@@ -195,6 +207,16 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
             yield return new WaitForSeconds(blinkInterval); // Wait again before hiding it.
         }
+    }
+
+    IEnumerator HammerPower()
+    {
+        myAnim.SetBool("Hammer", true);
+        HammerHitbox.SetActive(true) ;
+        yield return new WaitForSeconds(hammerDuration);
+
+        HammerHitbox.SetActive(false);
+        myAnim.SetBool("Hammer", false);
     }
 
     public void TakeHit() // Call this when a barrel hits the player.

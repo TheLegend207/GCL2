@@ -10,5 +10,8 @@ public class BarrelHit : MonoBehaviour
         {
             player.TakeHit();
         }
+
+        if (other.CompareTag("Hammer Hitbox"))
+            Destroy(gameObject);
     }
 }

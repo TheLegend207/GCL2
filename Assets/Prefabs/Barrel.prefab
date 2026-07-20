@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8454078499084859803}
   - component: {fileID: -4857824582051368226}
   - component: {fileID: 6046644769904051215}
-  - component: {fileID: 6949395182770203101}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Enemy
@@ -163,25 +162,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062788b9279984f3ea845447fbd39c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6949395182770203101
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8963236256024617234}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 10eca1f6519262a4eb34f07c82b909ee, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

@@ -16,7 +16,7 @@ public class BarrelPath : MonoBehaviour
         if (currentWaypointIndex >= waypoints.Count) //destroy when reaching past last waypoint
             return;
 
-        Transform target = waypoints[currentWaypointIndex]; //position of waypoints
+        Transform target = waypoints[currentWaypointIndex]; //position and count of waypoints
 
         transform.position = Vector3.MoveTowards( //moves the barrel towards the next waypoint
             transform.position,

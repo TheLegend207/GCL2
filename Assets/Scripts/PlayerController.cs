@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
     public float moveSpeed = 3f; // Normal movement speed.
     public float boostedSpeed = 6f; // Speed during the speed boost power-up.
     public float boostDuration = 4f; // How long the speed boost lasts.
-    public float jumpForce = 8f; // How high the player jumps.
+    public float jumpForce = 5.2f; // How high the player jumps.
     public float hammerDuration = 4f; //duration of hammer
     public float invincibilityTime = 5f;
 
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
     private LadderMovement ladderMovement; // Reference to the ladder script.
 
     private bool canTurn = true; // Controls whether the player can flip direction.
+    public bool canClimb; // Controls if player can climb
     public bool isInvincible = false; // True while the invincibility power-up is active.
     public bool shieldActive = false; // True while the one-hit shield is available.
     private int shieldHits = 0; // How many hits the shield can still absorb.
@@ -38,12 +39,14 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
     public GameObject HammerHitbox;
 
+
     void Start() // Runs once when the scene starts.
     {
         thePlayer = FindAnyObjectByType<PlayerController>(); // Finds the player object in the scene.
         rb = GetComponent<Rigidbody2D>(); // Gets the Rigidbody2D on this object.
         myAnim = GetComponent<Animator>(); // Gets the Animator on this object.
         ladderMovement = GetComponent<LadderMovement>(); // Gets the ladder script if it exists.
+        canClimb = true;
 
         if (spriteRenderer == null) // If the sprite renderer was not assigned in the Inspector...
             spriteRenderer = GetComponent<SpriteRenderer>(); // Grab it from this same object.
@@ -215,12 +218,16 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
     IEnumerator HammerPower()
     {
+        canClimb = false;
+        jumpForce = 0f;
         myAnim.SetBool("Hammer", true);
         HammerHitbox.SetActive(true) ;
         yield return new WaitForSeconds(hammerDuration);
 
         HammerHitbox.SetActive(false);
         myAnim.SetBool("Hammer", false);
+        canClimb = true;
+        jumpForce = 5.2f;
     }
 
     public void Die() // Call this when a barrel hits the player.

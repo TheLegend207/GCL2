@@ -5,25 +5,35 @@ public class LadderMovement : MonoBehaviour
     private float vertical;
     private float climbSpeed = 3f;
     private bool isLadder;
+    public PlayerController player;
+    public bool canClimb;
 
     // must be public (or public property) so PlayerController can read it
     public bool isClimbing { get; private set; }
 
     [SerializeField] private Rigidbody2D rb;
 
+    private void Start()
+    {
+        player = GetComponent<PlayerController>();
+    }
+
     void Update()
     {
-        vertical = Input.GetAxisRaw("Vertical");
+        if (player.canClimb == true)
+        {
+            vertical = Input.GetAxisRaw("Vertical");
 
-        if (isLadder && Mathf.Abs(vertical) > 0f)
-        {
-            isClimbing = true;
-            rb.gravityScale = 0f;
-        }
-        else if (!isLadder || Mathf.Abs(vertical) == 0f)
-        {
-            isClimbing = false;
-            rb.gravityScale = 1f;
+            if (isLadder && Mathf.Abs(vertical) > 0f)
+            {
+                isClimbing = true;
+                rb.gravityScale = 0f;
+            }
+            else if (!isLadder || Mathf.Abs(vertical) == 0f)
+            {
+                isClimbing = false;
+                rb.gravityScale = 1f;
+            }
         }
     }
 

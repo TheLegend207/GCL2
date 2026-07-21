@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
     //When click on a button, will take player to to the corresponding scene.. or just quit the game 
     public void NewGame()
     {
-        SceneManager.LoadScene("Level 01");
+        SceneManager.LoadScene("Level Select");
     }
 
     public void Credits() 
@@ -22,6 +22,18 @@ public class MainMenu : MonoBehaviour
     public void GoBack()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+    public void Easy()
+    {
+        SceneManager.LoadScene("Level 01");
+    }
+    public void Medium()
+    {
+        SceneManager.LoadScene("Level 01");
+    }
+    public void Hard()
+    {
+        SceneManager.LoadScene("Level 01");
     }
 
 }

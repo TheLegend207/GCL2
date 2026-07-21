@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class LevelManager : MonoBehaviour
@@ -16,8 +17,8 @@ public class LevelManager : MonoBehaviour
 
 
     }
-        // Update is called once per frame
-        
+    // Update is called once per frame
+
     public void AddScore(int scoreToAdd)
     {
         scoreCount += scoreToAdd;

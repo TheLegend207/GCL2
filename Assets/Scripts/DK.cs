@@ -16,22 +16,22 @@ public class DK : MonoBehaviour
     //edit animation length timing in unity instead of in the code
     //to permenantly change length set aniamtionLength = X under void start 
 
+    private Coroutine dkPatternCoroutine;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
-        StartCoroutine(DKPattern());
+        dkPatternCoroutine = StartCoroutine(DKPattern());
         
     }
 
-    IEnumerator DKPattern()
+    IEnumerator DKPattern() //DK attack patterns
     {
         while (true)
         {
             animator.SetTrigger("Attack");
             yield return new WaitForSeconds(attackAnimationLength);
-
-           /* animator.SetTrigger("Attack");
-            yield return new WaitForSeconds(attackAnimationLength);  */
 
             animator.SetTrigger("Chestbeat");
             yield return new WaitForSeconds(chestBeatLength);
@@ -65,4 +65,14 @@ public class DK : MonoBehaviour
         }
     }
 }
+
+public void StopDK()
+    {
+        if(dkPatternCoroutine != null)
+        {
+            StopCoroutine(dkPatternCoroutine);
+        }
+
+        animator.SetTrigger("Idle");
+    }
 }

@@ -1,4 +1,5 @@
 using System.Collections; // Needed for IEnumerator and coroutines.
+using System.Drawing;
 using Unity.VisualScripting; // Kept because your project already uses it.
 using UnityEngine; // Gives access to MonoBehaviour, Rigidbody2D, Animator, etc.
 using UnityEngine.SceneManagement; // Lets us reload the scene when the player dies.
@@ -21,8 +22,6 @@ public class PlayerController : MonoBehaviour // This script controls the player
     private bool isGrounded; // True when the player is on the ground.
     private bool isFacingRight = true; // Tracks the direction the player is facing.
     private Animator myAnim; // Controls player animations.
-
-    public bool canMove = true; // Lets you disable movement later if needed.
     public GameObject lightningEffects; // Visual effect for the speed boost.
     public GameObject Shield_effect; // The shield sprite / shield visual object.
     [SerializeField] private SpriteRenderer spriteRenderer; // The player's visible sprite so we can blink it.
@@ -219,7 +218,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
         myAnim.SetBool("Hammer", false);
     }
 
-    public void TakeHit() // Call this when a barrel hits the player.
+    public void Die() // Call this when a barrel hits the player.
     {
         if (shieldActive) // If the shield is active...
         {
@@ -235,6 +234,10 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
             return; // Do not restart the scene because the shield blocked the hit.
         }
+
+        moveSpeed = 0f;
+        canTurn = false;
+
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Restart the current scene if no shield is left.
     }

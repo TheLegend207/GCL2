@@ -18,7 +18,7 @@ public class BarrelHit : MonoBehaviour
 
         if (player != null)
         {
-            player.TakeHit();
+            player.Die();
         }
 
         if (other.CompareTag("Hammer Hitbox"))

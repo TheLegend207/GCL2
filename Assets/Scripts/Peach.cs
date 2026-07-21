@@ -1,11 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class Peach : MonoBehaviour
 {
         private Animator animator;
         public GameObject spriteToShow;
+        public VideoPlayer Explosion;
+        public GameObject DKExplosion;
         private bool triggered = false;
 
     void Start()
@@ -24,6 +28,12 @@ public class Peach : MonoBehaviour
         if (!triggered && other.CompareTag("Player")) //using reference to when player arrive in peach's hitbox
         {
             triggered = true;
+            DK DonkeyKong = FindAnyObjectByType<DK>();
+
+        if (DonkeyKong != null)
+        {
+            DonkeyKong.StopDK();
+        }
             CancelInvoke(nameof(PeachScream)); //stop screaming animation when player arrives
             animator.Play("Peach Idle");
             StartCoroutine(ShowSpriteAfterDelay());
@@ -35,7 +45,10 @@ public class Peach : MonoBehaviour
 
     IEnumerator WinScreenAfterDelay()
     {
-        yield return new WaitForSeconds(6.0f);
+        yield return new WaitForSeconds(3.0f);
+        DKExplosion.SetActive (true);
+        Explosion.Play();
+        yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene("Win Screen");
     }
 
@@ -49,5 +62,4 @@ public class Peach : MonoBehaviour
     {
         animator.SetTrigger("Scream");
     }
-
 }

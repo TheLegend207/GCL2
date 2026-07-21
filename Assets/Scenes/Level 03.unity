@@ -3359,7 +3359,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.05
+  m_fontSize: 18
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4626,7 +4626,7 @@ Transform:
   m_GameObject: {fileID: 1272882662}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5609639, y: -0.04613954, z: 0.06020324}
+  m_LocalPosition: {x: 0.82, y: 0.43, z: 0.06020324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6538,6 +6538,7 @@ MonoBehaviour:
   lightningEffects: {fileID: 1674945739}
   Shield_effect: {fileID: 798543965}
   spriteRenderer: {fileID: 1820799041}
+  canClimb: 0
   isInvincible: 0
   shieldActive: 0
   blinkInterval: 0.12
@@ -6603,6 +6604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddab3dd7a5e166f488eb384a26b4d618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  canClimb: 0
   rb: {fileID: 1820799043}
 --- !u!1 &1838138460
 GameObject:

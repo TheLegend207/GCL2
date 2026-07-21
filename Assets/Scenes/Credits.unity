@@ -257,8 +257,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4422787a34ae6854999cc5a21c362c75, type: 2}
+  m_sharedMaterial: {fileID: -8627458312679768741, guid: 4422787a34ae6854999cc5a21c362c75, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -467,7 +467,7 @@ RectTransform:
   m_GameObject: {fileID: 1627281509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7194529, y: 0.7194529, z: 0.7194529}
+  m_LocalScale: {x: 1.289312, y: 1.289312, z: 1.289312}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1480402532}
@@ -475,7 +475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -141, y: -120}
+  m_AnchoredPosition: {x: -447, y: -266}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1627281511
@@ -599,14 +599,14 @@ RectTransform:
   m_GameObject: {fileID: 1858065379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0625, y: 1, z: 1}
+  m_LocalScale: {x: 1.9040775, y: 1.7920729, z: 1.7920729}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1961694043}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 66}
+  m_AnchoredPosition: {x: 2, y: 96}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1858065381
@@ -629,12 +629,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Joshua (JoshyMoshy07)\nSanjeev (VeejnasYT) \nMemphis (shape007)\nHann
-    (TheLegend207)\nJoedon (JohnOriginalDude)\n\n                    \n\n\n\n\n For
-    educational purpose only"
+  m_text: "Joshua (JoshyMoshy07)\nSanjeev (Veejnas) \nMemphis (shape007)\nHann (TheLegend207)\nJoedon
+    (JohnOriginalDude)\n\n\nBackground from:https://screenrant.com/super-mario-fan-redesigns-art/\n
+    \nhttps://youtu.be/hzF-n2KZZuo  \n\n\n For educational purpose only"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4422787a34ae6854999cc5a21c362c75, type: 2}
+  m_sharedMaterial: {fileID: -8627458312679768741, guid: 4422787a34ae6854999cc5a21c362c75, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -92.09404, y: -53.317596, z: -89.500305, w: -184.19177}
+  m_margin: {x: -92.09404, y: -53.317596, z: -100.81619, w: -199.013}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

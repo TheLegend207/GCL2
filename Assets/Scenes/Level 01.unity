@@ -4233,6 +4233,8 @@ MonoBehaviour:
   attackAnimationLength: 3
   chestBeatLength: 1.5
   idleLength: 1.5
+  tripleAttackLength: 4.5
+  hardMode: 0
 --- !u!1 &1394141362
 GameObject:
   m_ObjectHideFlags: 0
@@ -5388,8 +5390,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1253792461
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300066, guid: 2f233cf67f812ee4c8152398ed053a35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5818,8 +5820,9 @@ MonoBehaviour:
   moveSpeed: 3
   boostedSpeed: 6
   boostDuration: 4
-  jumpForce: 6
+  jumpForce: 5.2
   hammerDuration: 4
+  invincibilityTime: 5
   groundCheck: {fileID: 2125783145}
   groundCheckRadius: 0.2
   whatIsGround:
@@ -5831,7 +5834,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1820799041}
   isInvincible: 0
   shieldActive: 0
-  blinkInterval: 0.15
+  blinkInterval: 0.12
   HammerHitbox: {fileID: 982219553}
 --- !u!50 &1820799043
 Rigidbody2D:

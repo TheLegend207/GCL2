@@ -2369,7 +2369,7 @@ Transform:
   m_GameObject: {fileID: 1030697474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.48, y: 2.8, z: -0.007866815}
+  m_LocalPosition: {x: 4.9, y: 2.89, z: -0.007866815}
   m_LocalScale: {x: 3.665821, y: 3.665821, z: 3.665821}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4233,6 +4233,8 @@ MonoBehaviour:
   attackAnimationLength: 3
   chestBeatLength: 1.5
   idleLength: 1.5
+  tripleAttackLength: 4.5
+  hardMode: 1
 --- !u!1 &1394141362
 GameObject:
   m_ObjectHideFlags: 0
@@ -5282,7 +5284,7 @@ Transform:
   m_GameObject: {fileID: 1632218760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9625883, y: -1.2880394, z: -0.007866815}
+  m_LocalPosition: {x: 1.38, y: -1.47, z: -0.007866815}
   m_LocalScale: {x: 4.5177197, y: 4.5177197, z: 4.5177197}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5388,8 +5390,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1253792461
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300066, guid: 2f233cf67f812ee4c8152398ed053a35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5816,10 +5818,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  boostedSpeed: 6
-  boostDuration: 4
-  jumpForce: 6
-  hammerDuration: 4
+  boostedSpeed: 4
+  boostDuration: 3
+  jumpForce: 5.2
+  hammerDuration: 3
+  invincibilityTime: 3
   groundCheck: {fileID: 2125783145}
   groundCheckRadius: 0.2
   whatIsGround:
@@ -5831,7 +5834,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1820799041}
   isInvincible: 0
   shieldActive: 0
-  blinkInterval: 0.15
+  blinkInterval: 0.12
   HammerHitbox: {fileID: 982219553}
 --- !u!50 &1820799043
 Rigidbody2D:
@@ -6557,7 +6560,7 @@ Transform:
   m_GameObject: {fileID: 2114951213}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.58, y: 0.58, z: -0.007866815}
+  m_LocalPosition: {x: -3.27, y: 2.69, z: -0.007866815}
   m_LocalScale: {x: 6.8454, y: 6.8454, z: 6.8454}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6860,11 +6863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 451742209849036718, guid: 130a0795057644a9896950ac13e8900f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.317411
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 451742209849036718, guid: 130a0795057644a9896950ac13e8900f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97196054
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 451742209849036718, guid: 130a0795057644a9896950ac13e8900f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7039,11 +7042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3532382722246303872, guid: 2b1536dc19acd4854a0b7d0cab801f4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.3074117
+      value: -8.4
       objectReference: {fileID: 0}
     - target: {fileID: 3532382722246303872, guid: 2b1536dc19acd4854a0b7d0cab801f4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96196055
+      value: 0.98
       objectReference: {fileID: 0}
     - target: {fileID: 3532382722246303872, guid: 2b1536dc19acd4854a0b7d0cab801f4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7214,11 +7217,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4026933267056271571, guid: 6b22779aee50a604ab507c0400653163, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7374117
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4026933267056271571, guid: 6b22779aee50a604ab507c0400653163, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5880396
+      value: 0.68
       objectReference: {fileID: 0}
     - target: {fileID: 4026933267056271571, guid: 6b22779aee50a604ab507c0400653163, type: 3}
       propertyPath: m_LocalPosition.z

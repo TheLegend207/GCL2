@@ -29,11 +29,11 @@ public class MainMenu : MonoBehaviour
     }
     public void Medium()
     {
-        SceneManager.LoadScene("Level 01");
+        SceneManager.LoadScene("Level 02");
     }
     public void Hard()
     {
-        SceneManager.LoadScene("Level 01");
+        SceneManager.LoadScene("Level 03");
     }
 
 }

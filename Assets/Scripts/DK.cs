@@ -13,6 +13,8 @@ public class DK : MonoBehaviour
     public float attackAnimationLength = 3f;
     public float chestBeatLength = 1.5f;
     public float idleLength = 1.5f;
+    public float tripleAttackLength = 4.5f;
+    public bool hardMode;
     //edit animation length timing in unity instead of in the code
     //to permenantly change length set aniamtionLength = X under void start 
 
@@ -38,6 +40,18 @@ public class DK : MonoBehaviour
 
             animator.SetTrigger("Idle");
             yield return new WaitForSeconds(idleLength);
+
+            if (hardMode == true)
+            {
+                animator.SetTrigger("Attack");
+                yield return new WaitForSeconds(tripleAttackLength);
+
+                animator.SetTrigger("Chestbeat");
+                yield return new WaitForSeconds(chestBeatLength);
+
+                animator.SetTrigger("Idle");
+                yield return new WaitForSeconds(idleLength);
+            }
         }
     }
         public void ShowBarrel()

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
     public float boostDuration = 4f; // How long the speed boost lasts.
     public float jumpForce = 8f; // How high the player jumps.
     public float hammerDuration = 4f; //duration of hammer
+    public float invincibilityTime = 5f;
 
     public Transform groundCheck; // A point below the player used to check if we are standing on ground.
     public float groundCheckRadius = 0.2f; // Radius of the ground-check circle.
@@ -185,7 +186,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
         blinkRoutine = StartCoroutine(BlinkPlayer()); // Start blinking the player sprite.
 
-        yield return new WaitForSeconds(5f); // Keep invincibility active for 5 seconds.
+        yield return new WaitForSeconds(invincibilityTime); // Keep invincibility active for a set amount of time.
 
          isInvincible = false; // Turn invincibility off.
 

@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour // This script controls the player
     private LadderMovement ladderMovement; // Reference to the ladder script.
 
     private bool canTurn = true; // Controls whether the player can flip direction.
-
+    public bool isInvincible = false; // True while the invincibility power-up is active.
     public bool shieldActive = false; // True while the one-hit shield is available.
     private int shieldHits = 0; // How many hits the shield can still absorb.
 
@@ -178,12 +178,16 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
     IEnumerator InvincibilityPowerUp() // Makes the player blink for a short time.
     {
+        isInvincible = true; // Turn invincibility on.
+
         if (blinkRoutine != null) // If blinking is already running...
             StopCoroutine(blinkRoutine); // Stop the old blink coroutine.
 
         blinkRoutine = StartCoroutine(BlinkPlayer()); // Start blinking the player sprite.
 
         yield return new WaitForSeconds(5f); // Keep invincibility active for 5 seconds.
+
+         isInvincible = false; // Turn invincibility off.
 
         if (blinkRoutine != null) // If the blink coroutine is still running...
             StopCoroutine(blinkRoutine); // Stop it.
@@ -234,7 +238,12 @@ public class PlayerController : MonoBehaviour // This script controls the player
 
             return; // Do not restart the scene because the shield blocked the hit.
         }
+        {
+        if (isInvincible) // If invincibility is active...
+            return; // Ignore the hit.
 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Restart the current scene.
+        }
         moveSpeed = 0f;
         canTurn = false;
 

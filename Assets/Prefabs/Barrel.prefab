@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreValue: 500
+  animator: {fileID: 4167688637813095261}
+  destroyDelay: 0.6
 --- !u!95 &4167688637813095261
 Animator:
   serializedVersion: 7

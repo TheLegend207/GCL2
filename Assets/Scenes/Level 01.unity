@@ -3078,7 +3078,7 @@ PrefabInstance:
       objectReference: {fileID: 1155965520}
     - target: {fileID: 6046644769904051215, guid: 810af105f07da48f6a00135edac42391, type: 3}
       propertyPath: destroyDelay
-      value: 0.4
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6046644769904051215, guid: 810af105f07da48f6a00135edac42391, type: 3}
       propertyPath: barrelCollider

@@ -1,261 +1,261 @@
-using System.Collections; // Needed for IEnumerator and coroutines.
+using System.Collections;
 using System.Drawing;
-using Unity.VisualScripting; // Kept because your project already uses it.
-using UnityEngine; // Gives access to MonoBehaviour, Rigidbody2D, Animator, etc.
-using UnityEngine.SceneManagement; // Lets us reload the scene when the player dies.
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour // This script controls the player character.
+public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 3f; // Normal movement speed.
-    public float boostedSpeed = 6f; // Speed during the speed boost power-up.
-    public float boostDuration = 4f; // How long the speed boost lasts.
-    public float jumpForce = 5.2f; // How high the player jumps.
+    public float moveSpeed = 3f; // normal movement speed
+    public float boostedSpeed = 6f; // speed boost speed
+    public float boostDuration = 4f; // power up duration
+    public float jumpForce = 5.2f; // player jump height
     public float hammerDuration = 4f; //duration of hammer
-    public float invincibilityTime = 5f;
+    public float invincibilityTime = 5f; //time for invincibility
 
-    public Transform groundCheck; // A point below the player used to check if we are standing on ground.
+    public Transform groundCheck; // checks if player is on ground
     public float groundCheckRadius = 0.2f; // Radius of the ground-check circle.
     public LayerMask whatIsGround; // Which layers count as ground.
 
-    public object thePlayer; // Existing reference in your script.
-    public Rigidbody2D rb; // The player's physics body.
-    private float moveInput; // Stores left/right input.
-    private bool isGrounded; // True when the player is on the ground.
-    private bool isFacingRight = true; // Tracks the direction the player is facing.
-    private Animator myAnim; // Controls player animations.
-    public GameObject lightningEffects; // Visual effect for the speed boost.
-    public GameObject Shield_effect; // The shield sprite / shield visual object.
-    [SerializeField] private SpriteRenderer spriteRenderer; // The player's visible sprite so we can blink it.
-    private LadderMovement ladderMovement; // Reference to the ladder script.
+    public object thePlayer;  //references the player
+    public Rigidbody2D rb; //finds rigidbody2d
+    private float moveInput; 
+    private bool isGrounded; 
+    private bool isFacingRight = true; 
+    private Animator myAnim; //finds animator
+    public GameObject lightningEffects; 
+    public GameObject Shield_effect; 
+    [SerializeField] private SpriteRenderer spriteRenderer; 
+    private LadderMovement ladderMovement;  //finds ladder script
 
-    private bool canTurn = true; // Controls whether the player can flip direction.
-    public bool canClimb; // Controls if player can climb
-    public bool isInvincible = false; // True while the invincibility power-up is active.
-    public bool shieldActive = false; // True while the one-hit shield is available.
-    private int shieldHits = 0; // How many hits the shield can still absorb.
+    private bool canTurn = true; 
+    public bool canClimb; 
+    public bool isInvincible = false; 
+    public bool shieldActive = false; 
+    private int shieldHits = 0; 
 
-    private Coroutine blinkRoutine; // Stores the blinking coroutine so we can stop it later.
-    public float blinkInterval = 0.15f; // Speed of the blinking effect.
+    private Coroutine blinkRoutine;
+    public float blinkInterval = 0.15f; 
 
     public GameObject HammerHitbox;
 
 
-    void Start() // Runs once when the scene starts.
+    void Start() 
     {
-        thePlayer = FindAnyObjectByType<PlayerController>(); // Finds the player object in the scene.
-        rb = GetComponent<Rigidbody2D>(); // Gets the Rigidbody2D on this object.
-        myAnim = GetComponent<Animator>(); // Gets the Animator on this object.
-        ladderMovement = GetComponent<LadderMovement>(); // Gets the ladder script if it exists.
+        thePlayer = FindAnyObjectByType<PlayerController>(); // finds player controller
+        rb = GetComponent<Rigidbody2D>(); // finds rigidbody2d
+        myAnim = GetComponent<Animator>(); // finds player animator
+        ladderMovement = GetComponent<LadderMovement>(); // finds ladder script
         canClimb = true;
 
-        if (spriteRenderer == null) // If the sprite renderer was not assigned in the Inspector...
-            spriteRenderer = GetComponent<SpriteRenderer>(); // Grab it from this same object.
+        if (spriteRenderer == null) 
+            spriteRenderer = GetComponent<SpriteRenderer>();  //get sprite from object if sprite is null
 
-        if (Shield_effect != null) // Make sure the shield object exists before touching it.
-            Shield_effect.SetActive(false); // Start with the shield hidden.
+        if (Shield_effect != null) 
+            Shield_effect.SetActive(false);  //start with shield hidden
 
-            HammerHitbox.SetActive(false);
+            HammerHitbox.SetActive(false); //start with hammer hitbox hidden
     }
 
-    void Update() // Runs once every frame.
+    void Update() 
     {
-        if (!canTurn) // If turning is disabled...
+        if (!canTurn) 
         {
-            rb.linearVelocity = Vector2.zero; // Stop the player completely.
-            return; // Skip the rest of Update.
+            rb.linearVelocity = Vector2.zero; //player cannot turn if it is on
+            return; 
         }
 
-        bool isClimbing = ladderMovement != null && ladderMovement.isClimbing; // Check if the player is climbing.
-        myAnim.SetBool("IsClimbing", isClimbing); // Tell the Animator if we are climbing.
+        bool isClimbing = ladderMovement != null && ladderMovement.isClimbing; 
+        myAnim.SetBool("IsClimbing", isClimbing);  //set animation to climbing
 
-        if (isClimbing) // If the player is on a ladder...
+        if (isClimbing) //when climbing
         {
-            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); // Stop horizontal movement while climbing.
-            myAnim.speed = Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0f ? 1f : 0f; // Pause or play climb animation.
-            return; // Do not run normal walking code while climbing.
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); //stops horizontal movement
+            myAnim.speed = Mathf.Abs(Input.GetAxisRaw("Vertical")) > 0f ? 1f : 0f; 
+            return;
         }
         else
         {
-            myAnim.speed = 1f; // Make sure animations play normally when not climbing.
+            myAnim.speed = 1f; //makes sure animation speed is 1f
         }
 
-        moveInput = Input.GetAxisRaw("Horizontal"); // Read left/right movement input.
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y); // Move the player sideways.
+        moveInput = Input.GetAxisRaw("Horizontal"); //gets left right input
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y); //player moves left right
 
-        if (Input.GetButtonDown("Jump") && isGrounded) // Jump only if the player is grounded.
+        if (Input.GetButtonDown("Jump") && isGrounded) // jump if the player is grounded
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Push the player upward.
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // how high the player jumps
         }
 
-        if (canTurn == true) // Only flip the player if turning is allowed.
+        if (canTurn == true) // player can flip if true
         {
-            myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x)); // Update the speed parameter in the Animator.
-            if (moveInput > 0 && !isFacingRight) // Moving right but currently facing left...
-                Flip(); // Turn to face right.
-            else if (moveInput < 0 && isFacingRight) // Moving left but currently facing right...
-                Flip(); // Turn to face left.
+            myAnim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x)); 
+            if (moveInput > 0 && !isFacingRight) 
+                Flip(); // flip to the right
+            else if (moveInput < 0 && isFacingRight) 
+                Flip(); // flip to the left
         }
     }
 
-    void FixedUpdate() // Runs at a fixed time step, which is better for physics checks.
+    void FixedUpdate() 
     {
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position,
             groundCheckRadius,
             whatIsGround
-        ); // Detect whether the ground-check circle overlaps the ground layer.
+        ); //checks if groundcheck is in contact with ground layer
     }
 
-    void Flip() // Flips the player sprite left/right.
+    void Flip() //flips player left or right
     {
-        isFacingRight = !isFacingRight; // Switch the facing direction.
+        isFacingRight = !isFacingRight;
 
-        Vector3 scaler = transform.localScale; // Get the current local scale.
-        scaler.x *= -1; // Reverse the X scale to mirror the sprite.
-        transform.localScale = scaler; // Apply the new scale.
+        Vector3 scaler = transform.localScale; //get current scale
+        scaler.x *= -1; //flip current scale
+        transform.localScale = scaler;  //set new scale as the "current" scale
     }
 
-    private void OnTriggerEnter2D(Collider2D other) // Runs when the player enters a trigger collider.
+    private void OnTriggerEnter2D(Collider2D other) //when player enters trigger 2d
     {
-        if (other.CompareTag("SpeedBoots")) // If the player touches a speed boost pickup...
+        if (other.CompareTag("SpeedBoots")) //if tag is for speedboosts
         {
-            Destroy(other.gameObject); // Remove the pickup.
-            StartCoroutine(SpeedBoost()); // Start the speed boost coroutine.
+            Destroy(other.gameObject); //destroy speedboots
+            StartCoroutine(SpeedBoost()); //speed up the player
         }
 
-        if (other.CompareTag("Peach")) // If the player touches Peach...
+        if (other.CompareTag("Peach")) //if tag is for peach
         {
-            isFacingRight = false; // Force facing direction.
-            canTurn = false; // Stop the player from turning.
-            moveSpeed = 0f; // Freeze movement.
-            myAnim.SetFloat("Speed", Mathf.Abs(0f)); // Set animation speed to zero.
+            isFacingRight = false; //make player look left
+            canTurn = false; // stop the player from turning
+            moveSpeed = 0f; // stops player from moving left or right
+            myAnim.SetFloat("Speed", Mathf.Abs(0f)); // set animation speed to zero
         }
 
-        if (other.CompareTag("Shield")) // If the player touches a shield pickup...
+        if (other.CompareTag("Shield")) // if tag is shield
         {
-            Destroy(other.gameObject); // Remove the pickup.
-            StartCoroutine(Shield()); // Start the one-hit shield coroutine.
+            Destroy(other.gameObject); // destroy shield
+            StartCoroutine(Shield()); // do shield coroutine
         }
 
-        if (other.CompareTag("Invincibility")) // If the player touches the invincibility pickup...
+        if (other.CompareTag("Invincibility")) // if tag is invincibility
         {
-            Destroy(other.gameObject); // Remove the pickup.
-            StartCoroutine(InvincibilityPowerUp()); // Start the blinking invincibility effect.
+            Destroy(other.gameObject); // remove the pickup
+            StartCoroutine(InvincibilityPowerUp()); // start invincibility effect coroutine
         }
 
-        if (other.CompareTag("Hammer"))
+        if (other.CompareTag("Hammer")) //if tag is hammer
         {
           
-            Destroy(other.gameObject);
-            StartCoroutine(HammerPower());
+            Destroy(other.gameObject); //remove hammer pickup
+            StartCoroutine(HammerPower()); //do the hammer coroutine
         }
     }
 
-    IEnumerator SpeedBoost() // Makes the player faster for a limited time.
+    IEnumerator SpeedBoost() 
     {
-        moveSpeed = boostedSpeed; // Increase movement speed.
-        lightningEffects.SetActive(true); // Show the lightning effect.
-        yield return new WaitForSeconds(boostDuration); // Wait until the boost ends.
-        moveSpeed = 3f; // Restore normal movement speed.
-        lightningEffects.SetActive(false); // Hide the lightning effect.
+        moveSpeed = boostedSpeed; // increase movement speed
+        lightningEffects.SetActive(true); // show the lightning
+        yield return new WaitForSeconds(boostDuration); // time to wait until boost eneds
+        moveSpeed = 3f; // return to base speed
+        lightningEffects.SetActive(false); // hide the lightning
     }
     
-    IEnumerator Shield() // Activates a shield that blocks one hit.
+    IEnumerator Shield() 
     {
-        shieldActive = true; // Turn shield protection on.
-        shieldHits = 1; // The shield can absorb exactly one hit.
+        shieldActive = true; // turn on shield
+        shieldHits = 1; // set shield hp to 1
 
-        if (Shield_effect != null) // Make sure the shield visual exists.
-            Shield_effect.SetActive(true); // Show the shield sprite.
+        if (Shield_effect != null) 
+            Shield_effect.SetActive(true); //show shield sprite if not shown already
 
-        yield return new WaitForSeconds(boostDuration); // Keep the shield active for the timer.
+        yield return new WaitForSeconds(boostDuration); // shield timer
 
-        if (shieldActive) // If the shield was not already consumed by a hit...
+        if (shieldActive) // if shield isnt used
         {
-            shieldActive = false; // Turn shield protection off.
-            shieldHits = 0; // Reset hit count.
+            shieldActive = false; // turn off shield
+            shieldHits = 0; // set hp to 0
 
-            if (Shield_effect != null) // Make sure the shield visual exists.
-                Shield_effect.SetActive(false); // Hide the shield sprite.
+            if (Shield_effect != null) 
+                Shield_effect.SetActive(false); //hide the shield
         }
     }
 
-    IEnumerator InvincibilityPowerUp() // Makes the player blink for a short time.
+    IEnumerator InvincibilityPowerUp() 
     {
-        isInvincible = true; // Turn invincibility on.
+        isInvincible = true; // turn on invincibility
 
-        if (blinkRoutine != null) // If blinking is already running...
-            StopCoroutine(blinkRoutine); // Stop the old blink coroutine.
+        if (blinkRoutine != null) 
+            StopCoroutine(blinkRoutine); 
 
-        blinkRoutine = StartCoroutine(BlinkPlayer()); // Start blinking the player sprite.
+        blinkRoutine = StartCoroutine(BlinkPlayer()); //blink the player
 
-        yield return new WaitForSeconds(invincibilityTime); // Keep invincibility active for a set amount of time.
+        yield return new WaitForSeconds(invincibilityTime); // invincibility powerup duration
 
-         isInvincible = false; // Turn invincibility off.
+         isInvincible = false; // turn off invincibility
 
-        if (blinkRoutine != null) // If the blink coroutine is still running...
-            StopCoroutine(blinkRoutine); // Stop it.
+        if (blinkRoutine != null) 
+            StopCoroutine(blinkRoutine); // force stop coroutine
 
-        if (spriteRenderer != null) // Make sure the player sprite exists.
-            spriteRenderer.enabled = true; // Force the sprite visible again at the end.
+        if (spriteRenderer != null) 
+            spriteRenderer.enabled = true; //force sprite renderer if it is not loaded
     }
 
-    IEnumerator BlinkPlayer() // Makes the sprite flicker on and off.
+    IEnumerator BlinkPlayer() //make player flicker
     {
-        while (true) // Keep blinking until the coroutine is stopped.
+        while (true) //loop to keep going until turned off
         {
-            if (spriteRenderer != null) // Check that the sprite exists.
-                spriteRenderer.enabled = false; // Hide the sprite.
+            if (spriteRenderer != null) 
+                spriteRenderer.enabled = false; //hide sprite
 
-            yield return new WaitForSeconds(blinkInterval); // Wait a short moment.
+            yield return new WaitForSeconds(blinkInterval); // wait some time
 
-            if (spriteRenderer != null) // Check again before re-enabling.
-                spriteRenderer.enabled = true; // Show the sprite.
+            if (spriteRenderer != null) 
+                spriteRenderer.enabled = true; //show sprite
 
-            yield return new WaitForSeconds(blinkInterval); // Wait again before hiding it.
+            yield return new WaitForSeconds(blinkInterval); // wait some time before looping
         }
     }
 
     IEnumerator HammerPower()
     {
-        canClimb = false;
-        jumpForce = 0f;
-        myAnim.SetBool("Hammer", true);
-        HammerHitbox.SetActive(true) ;
-        yield return new WaitForSeconds(hammerDuration);
+        canClimb = false; //force player unable to climb
+        jumpForce = 0f;//force player unable to jump
+        myAnim.SetBool("Hammer", true); //turn on hammer swing animation
+        HammerHitbox.SetActive(true) ; //turn on hammer hitbox
+        yield return new WaitForSeconds(hammerDuration); //wait time for hammer duration
 
-        HammerHitbox.SetActive(false);
-        myAnim.SetBool("Hammer", false);
-        canClimb = true;
-        jumpForce = 5.2f;
+        HammerHitbox.SetActive(false); //turn off hammer hitbox
+        myAnim.SetBool("Hammer", false); //turn off swing animation
+        canClimb = true; //let player climb again
+        jumpForce = 5.2f; //let player jump again
     }
 
-    public void Die() // Call this when a barrel hits the player.
+    public void Die() //dies when player is hit 
     {
-        if (shieldActive) // If the shield is active...
+        if (shieldActive) //if shield is active
         {
-            shieldHits--; // Spend one shield hit.
+            shieldHits--; //-1hp from shield
 
-            if (shieldHits <= 0) // If the shield has no hits left...
+            if (shieldHits <= 0) // if shield 0hp
             {
-                shieldActive = false; // Turn shield protection off.
+                shieldActive = false; // turn off shield
 
-                if (Shield_effect != null) // Make sure the shield visual exists.
-                    Shield_effect.SetActive(false); // Hide the shield sprite.
+                if (Shield_effect != null) 
+                    Shield_effect.SetActive(false); // force hide shield sprite
             }
 
-            return; // Do not restart the scene because the shield blocked the hit.
+            return; 
         }
         {
-        if (isInvincible) // If invincibility is active...
-            return; // Ignore the hit.
+        if (isInvincible) //if invincibility is on
+            return; // ignore shield damage
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Restart the current scene.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         moveSpeed = 0f;
         canTurn = false;
 
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Restart the current scene if no shield is left.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

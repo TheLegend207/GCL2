@@ -12,7 +12,7 @@ public class Collectables : MonoBehaviour
 
         )
     {
-        theLevelManager = FindFirstObjectByType<LevelManager>();
+        theLevelManager = FindFirstObjectByType<LevelManager>(); //finds level manager
     }
 
     // Update is called once per frame
@@ -22,12 +22,12 @@ public class Collectables : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) //when colliding with another trigger hitbox
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player") //if tag is player
         {
-            theLevelManager.AddScore(scoreValue);
-            Destroy(gameObject);
+            theLevelManager.AddScore(scoreValue); //add score to the level manager
+            Destroy(gameObject); //destroy collectable
         }
     }
 

@@ -3,30 +3,30 @@ using UnityEngine;
 
 public class BarrelPath : MonoBehaviour
 {
-    private List<Transform> waypoints;
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float stopDistance = 0.1f;
+    private List<Transform> waypoints; //creates waypoints for barrels to go to
+    [SerializeField] private float moveSpeed = 3f; //barrel speed
+    [SerializeField] private float stopDistance = 0.1f; //barrel stops moving distance
     private int currentWaypointIndex = 0;
 
     void Update()
     {
-        if (waypoints == null || waypoints.Count == 0)
+        if (waypoints == null || waypoints.Count == 0) //return if no waypoints
+            return; 
+
+        if (currentWaypointIndex >= waypoints.Count) //destroy when reaching past last waypoint
             return;
 
-        if (currentWaypointIndex >= waypoints.Count)
-            return;
+        Transform target = waypoints[currentWaypointIndex]; //position of waypoints
 
-        Transform target = waypoints[currentWaypointIndex];
-
-        transform.position = Vector3.MoveTowards(
+        transform.position = Vector3.MoveTowards( //moves the barrel towards the next waypoint
             transform.position,
-            target.position,
-            moveSpeed * Time.deltaTime
+            target.position, //waypoints position
+            moveSpeed * Time.deltaTime //speed and time of barrel movement
         );
 
         if (Vector3.Distance(transform.position, target.position) <= stopDistance)
         {
-            currentWaypointIndex++;
+            currentWaypointIndex++; //increase waypoint count when reaching a new waypoint
         }
     }
 

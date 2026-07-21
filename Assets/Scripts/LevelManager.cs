@@ -13,16 +13,16 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         if (scoreText != null)
-            scoreText.text = "Score:" + scoreCount;
+            scoreText.text = "Score:" + scoreCount; //shows the current score
 
 
     }
     // Update is called once per frame
 
-    public void AddScore(int scoreToAdd)
+    public void AddScore(int scoreToAdd) 
     {
-        scoreCount += scoreToAdd;
+        scoreCount += scoreToAdd; //add score from other scripts to the current score count
         if (scoreText != null)
-            scoreText.text = "Score:" + scoreCount;
+            scoreText.text = "Score:" + scoreCount; //shows the new current score
     }
 }

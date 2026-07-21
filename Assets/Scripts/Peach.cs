@@ -14,7 +14,7 @@ public class Peach : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); //get animator for peach
         InvokeRepeating(nameof(PeachScream), 8f, 8f); //Plays the scream animation every 8 seconds
     }
 
@@ -43,11 +43,11 @@ public class Peach : MonoBehaviour
         }
     }
 
-    IEnumerator WinScreenAfterDelay()
+    IEnumerator WinScreenAfterDelay() //delay before DK explosion plays
     {
         yield return new WaitForSeconds(3.0f);
-        DKExplosion.SetActive (true);
-        Explosion.Play();
+        DKExplosion.SetActive (true);           //unhides DK exploding
+        Explosion.Play();                       //DK explodes
         yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene("Win Screen");
     }

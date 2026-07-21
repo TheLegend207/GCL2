@@ -23,8 +23,8 @@ public class DK : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        dkPatternCoroutine = StartCoroutine(DKPattern());
+        animator = GetComponent<Animator>(); //find the animator for DK
+        dkPatternCoroutine = StartCoroutine(DKPattern()); //start the cycle of DK animation
         
     }
 
@@ -57,25 +57,25 @@ public class DK : MonoBehaviour
         public void ShowBarrel()
 {
     if (heldBarrel != null)
-        heldBarrel.SetActive(true);
+        heldBarrel.SetActive(true); //show barrel before being thrown
 }
      public void ThrowBarrel()
 {
     if (heldBarrel != null)
-        heldBarrel.SetActive(false);
+        heldBarrel.SetActive(false); //hide barrel after being thrown
 
-    if (barrelPrefab == null || barrelSpawnPoint == null)
+    if (barrelPrefab == null || barrelSpawnPoint == null) //destroy barrel if null
         return;
 
-    GameObject barrel = Instantiate(barrelPrefab, barrelSpawnPoint.position, barrelSpawnPoint.rotation);
+    GameObject barrel = Instantiate(barrelPrefab, barrelSpawnPoint.position, barrelSpawnPoint.rotation); //spawn barrel position
 
-    BarrelPath barrelPath = barrel.GetComponent<BarrelPath>();
+    BarrelPath barrelPath = barrel.GetComponent<BarrelPath>(); //gets barrel path from other script
     if (barrelPath != null && BarrelRouteManager.Instance != null)
     {
-        List<Transform> route = BarrelRouteManager.Instance.GetRandomRoute();
+        List<Transform> route = BarrelRouteManager.Instance.GetRandomRoute(); //get a random route from other script
         if (route != null && route.Count > 0)
         {
-            barrelPath.SetPath(route);
+            barrelPath.SetPath(route); //set path to the random route selected
         }
     }
 }
@@ -84,9 +84,9 @@ public void StopDK()
     {
         if(dkPatternCoroutine != null)
         {
-            StopCoroutine(dkPatternCoroutine);
+            StopCoroutine(dkPatternCoroutine); //stop animations when player reaches peach
         }
 
-        animator.SetTrigger("Idle");
+        animator.SetTrigger("Idle"); //set animation to idle animation
     }
 }
